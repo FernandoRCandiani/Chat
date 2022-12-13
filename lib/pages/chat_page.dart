@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:chat/components/messages.dart';
 import 'package:chat/components/new_messages.dart';
+import 'package:chat/core/models/chat_notification.dart';
 import 'package:chat/core/services/auth/auth_service.dart';
+import 'package:chat/core/services/notification/chat_notification_service.dart';
+import 'package:chat/pages/notification_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
@@ -10,10 +15,11 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Coder Chat'),
-          actions: [
-            DropdownButton(
+      appBar: AppBar(
+        title: const Text('Coder Chat'),
+        actions: [
+          DropdownButtonHideUnderline(
+            child: DropdownButton(
               icon: Icon(
                 Icons.more_vert,
                 color: Theme.of(context).primaryIconTheme.color,
@@ -41,17 +47,59 @@ class ChatPage extends StatelessWidget {
                 }
               },
             ),
-          ],
-        ),
-        body: SafeArea(
-          child: Column(
-            children: const [
-              Expanded(
-                child: Messages(),
+          ),
+          Stack(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) {
+                      return const NotificationPage();
+                    }),
+                  );
+                },
+                icon: Icon(Icons.notifications),
               ),
-              NewMessages(),
+              Positioned(
+                top: 5,
+                right: 5,
+                child: CircleAvatar(
+                  maxRadius: 10,
+                  backgroundColor: Colors.red.shade800,
+                  child: Text(
+                    '${Provider.of<ChatNotificationService>(context).itemsCount}',
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
-        ));
+        ],
+      ),
+      body: SafeArea(
+        child: Column(
+          children: const [
+            Expanded(
+              child: Messages(),
+            ),
+            NewMessages(),
+          ],
+        ),
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: const Icon(Icons.add),
+      //   onPressed: () {
+      //     Provider.of<ChatNotificationService>(
+      //       context,
+      //       listen: false,
+      //     ).add(ChatNotification(
+      //       title: 'Mais uma notificação!',
+      //       body: Random().nextDouble().toString(),
+      //     ));
+      //   },
+      // ),
+    );
   }
 }
