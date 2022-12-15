@@ -12,10 +12,12 @@ class ChatMockService implements ChatService {
     controller.add(_msgs);
   });
 
+  @override
   Stream<List<ChatMessage>> messagesStream() {
     return _msgsStream;
   }
 
+  @override
   Future<ChatMessage> save(String text, ChatUser user) async {
     final newMessage = ChatMessage(
       id: Random().nextDouble().toString(),
@@ -23,7 +25,7 @@ class ChatMockService implements ChatService {
       createdAt: DateTime.now(),
       userId: user.id,
       userName: user.name,
-      userImageURL: user.imageURL,
+      userImageUrl: user.imageURL,
     );
     _msgs.add(newMessage);
     _controller?.add(_msgs.reversed.toList());

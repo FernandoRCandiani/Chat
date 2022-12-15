@@ -1,8 +1,8 @@
-import 'dart:math';
+// import 'dart:math';
 
 import 'package:chat/components/messages.dart';
 import 'package:chat/components/new_messages.dart';
-import 'package:chat/core/models/chat_notification.dart';
+// import 'package:chat/core/models/chat_notification.dart';
 import 'package:chat/core/services/auth/auth_service.dart';
 import 'package:chat/core/services/notification/chat_notification_service.dart';
 import 'package:chat/pages/notification_page.dart';
@@ -16,7 +16,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Coder Chat'),
+        title: const Text('Cod3r Chat'),
         actions: [
           DropdownButtonHideUnderline(
             child: DropdownButton(
@@ -27,17 +27,15 @@ class ChatPage extends StatelessWidget {
               items: [
                 DropdownMenuItem(
                   value: 'logout',
-                  child: Container(
-                    child: Row(
-                      children: const [
-                        Icon(
-                          Icons.exit_to_app,
-                          color: Colors.black87,
-                        ),
-                        SizedBox(width: 10),
-                        Text('Sair'),
-                      ],
-                    ),
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.exit_to_app,
+                        color: Colors.black87,
+                      ),
+                      SizedBox(width: 10),
+                      Text('Sair'),
+                    ],
                   ),
                 ),
               ],
@@ -51,6 +49,7 @@ class ChatPage extends StatelessWidget {
           Stack(
             children: [
               IconButton(
+                icon: const Icon(Icons.notifications),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (ctx) {
@@ -58,7 +57,6 @@ class ChatPage extends StatelessWidget {
                     }),
                   );
                 },
-                icon: Icon(Icons.notifications),
               ),
               Positioned(
                 top: 5,
@@ -81,9 +79,7 @@ class ChatPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: const [
-            Expanded(
-              child: Messages(),
-            ),
+            Expanded(child: Messages()),
             NewMessages(),
           ],
         ),

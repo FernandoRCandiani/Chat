@@ -11,14 +11,15 @@ class LoadingPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(
+            const CircularProgressIndicator(
               backgroundColor: Colors.white,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
-              'Carregndo...',
+              'Carregando...',
               style: TextStyle(
-                color: Colors.white,
+                // color: Colors.white,
+                color: Theme.of(context).primaryTextTheme.headline6?.color,
               ),
             ),
           ],

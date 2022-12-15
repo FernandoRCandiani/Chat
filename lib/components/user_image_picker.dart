@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserImagePicker extends StatefulWidget {
-  final Function(File image) onImagePick;
+  final void Function(File image) onImagePick;
 
   const UserImagePicker({
     required this.onImagePick,
@@ -48,13 +48,12 @@ class _UserImagePickerState extends State<UserImagePicker> {
           onPressed: _pickImage,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Icon(
                 Icons.image,
-                color: Theme.of(context).primaryColor,
               ),
-              const SizedBox(width: 10),
-              const Text('Adicionar Imagem'),
+              SizedBox(width: 10),
+              Text('Adicionar Imagem'),
             ],
           ),
         ),

@@ -52,10 +52,7 @@ class AuthMockService implements AuthService {
   }
 
   @override
-  Future<void> login(
-    String email,
-    String password,
-  ) async {
+  Future<void> login(String email, String password) async {
     _updateUser(_users[email]);
   }
 
